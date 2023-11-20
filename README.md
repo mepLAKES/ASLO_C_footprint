@@ -1,6 +1,10 @@
-# ASLO_C_footprint
+#Project Title
+
+ASLO_C_footprint
 
 Computation of the carbon footprint of ASM (ASLO) and tests of alternative options
+
+#Project information
 
 1.  **Automated text analysis on abstracts from the ASM 2023.**
 
@@ -29,3 +33,9 @@ Computation of the carbon footprint of ASM (ASLO) and tests of alternative optio
 4.  **References**
 
 Department for Energy Security and Net Zero and Department for Business, E. I. S. 2022. Greenhouse gas reporting: conversion factors 2022, p. These emission conversion factors are for use by UK and international organisations to report on 2022 greenhouse gas emissions. *In* E. I. S. Department for Energy Security and Net Zero and Department for Business [ed.]. GOV.UK.
+
+#How to run the code xxx
+
+#Credits Marie-Elodie Perga [marie-elodie.perga\@unil.ch](mailto:marie-elodie.perga@unil.ch){.email} ref on arXiv.org
+
+#Licence MIT licence see Licence.txt

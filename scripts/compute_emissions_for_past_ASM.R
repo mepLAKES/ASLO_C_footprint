@@ -1,5 +1,5 @@
 # emissions for all ASLO conferences since 2004
-
+getwd(~)
 ##necessary packages, functions and Data
 ###libraries
 install.packages("devtools")
@@ -19,7 +19,7 @@ library(ggplot2)
 
 ###required function
 ####read multiple sheets of attendance
-source("./scripts/function_Multiple_sheets.R")
+source("~/scripts/function_Multiple_sheets.R",chdir=T)
 source("./scripts/function_travel-related_emissions.R")
 
 
