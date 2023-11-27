@@ -1,10 +1,10 @@
-#Project Title
+**Project Title**
 
 ASLO_C_footprint
 
 Computation of the carbon footprint of ASM (ASLO) and tests of alternative options
 
-#Project information
+**Project information**
 
 1.  **Automated text analysis on abstracts from the ASM 2023.**
 
@@ -18,13 +18,13 @@ Computation of the carbon footprint of ASM (ASLO) and tests of alternative optio
 
     After importation (function_Multiple_sheets), GPS coordinates for the origin of attendees are extracted from Googlemaps using the ggmap package (API key required).
 
-    GPS coords are used to extract the code for the closest airport from the attendees'origin (from the airport package), and the to compute carbon emissions either from the carbonr package, or by computing the travelled distance from the great-circle distance (from the geosphere package) between the origin and the conference venue (back and forth), et multiplying the distance by the conversion factor (average value for direct, economic flight of 163 gCO`2eq`/km, Department for Energy Security and Net Zero and Department for Business, E. I. S. 2022). Both are strictly equivalent.
+    GPS coords are used to extract the code for the closest airport from the attendees'origin (from the airport package), and then to compute carbon emissions either from the carbonr package, or by computing the travelled distance from the great-circle distance (from the geosphere package) between the origin and the conference venue (back and forth), and multiplying the distance by the conversion factor (average value for direct, economic flight of 163 gCO`2eq`/km, Department for Energy Security and Net Zero and Department for Business, E. I. S. 2022). Both are strictly equivalent.
 
     For attendees who are \<1000 km from the conference venue, we considered they could travel using land-based transport. We considered that landbound transportation would be 20% longer than the great circle distance, et we use the average conversion factor for Worldwide train or regular-size shared car (30 gCO`2eq`/km, Department for Energy Security and Net Zero and Department for Business, E. I. S. 2022).
 
 3.  **Estimating CO`2eq` emissions for multi-hub models**
 
-    herein we choose Vienna, Madison and Hong-Kong as potential hubs, and used attendance for ASM 2023 as the base data.
+    Herein we chose Vienna, Madison and Hong-Kong as potential hubs, and used attendance for ASM 2023 as the base data.
 
     For a single hub, emissions are computed as in 2.
 
@@ -34,8 +34,11 @@ Computation of the carbon footprint of ASM (ASLO) and tests of alternative optio
 
 Department for Energy Security and Net Zero and Department for Business, E. I. S. 2022. Greenhouse gas reporting: conversion factors 2022, p. These emission conversion factors are for use by UK and international organisations to report on 2022 greenhouse gas emissions. *In* E. I. S. Department for Energy Security and Net Zero and Department for Business [ed.]. GOV.UK.
 
-#How to run the code xxx
+**How to run the code xxx**
 
-#Credits Marie-Elodie Perga [marie-elodie.perga\@unil.ch](mailto:marie-elodie.perga@unil.ch){.email} ref on arXiv.org
+**Credits Marie-Elodie Perga** [marie-elodie.perga\@unil.ch](mailto:marie-elodie.perga@unil.ch){.email} 
+Perga, M. E., T. Dittmar, D. Bouffard, and E. Kritzberg. submitted. The elephant in the conference room:
+Reducing the Carbon Footprint of Aquatic Science Meetings.
 
-#Licence MIT licence see Licence.txt
+**Licence MIT licence **
+see Licence.txt
