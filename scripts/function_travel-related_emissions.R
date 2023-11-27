@@ -1,5 +1,8 @@
+
 #function to compute airplane emissions and potential landbased emissions 
-#Compute emissions for any location
+#conf_C_footprint compute CO2e for attendees' transport to the conference venue by air-travel (in tCO2e), the total travelled distance (km), and how much of total emission (%) can saved by switch on landbound transport
+
+#required packages
 
 library(tidygeocoder)
 library("airportr")
@@ -14,15 +17,16 @@ library(ggplot2)
 install.packages("devtools")
 devtools::install_github("IDEMSInternational/carbonr")
 
-
-#conf_loc_iata
-#conf_loc_coord (lon, lat)
-#origin_iata
-#n_per_origi
-#origin_coord (lon, lat)
-#distance_landbasedTransport
-#conversion_train
+#function parameters
+#conf_loc_iata: IATA code for the closest airport of the conference location 
+#conf_loc_coord (lon, lat) : coordinates for the conference location
+#origin_iata: IATA code for the closest airport to the attendees' city of origin (vector)
+#n_per_origin : number of attendees coming from this location (vector)
+#origin_coord (lon, lat): coordinates for the attendee's origin (data.frame with lon and lat as column names)
+#distance_landbasedTransport : max distance at which landbound transport can substitute air-travel (by default 1000 km)_single number
+#conversion_train : conversion factor for landbound transport (herein 30g co2e/km)_ single number
 #NAs=number of nas
+
 #requires geosphere,airportr,footprint,carbonr
 
 conf_C_footprint <- function(conf_loc_iata,conf_loc_coord,origin_iata,n_per_origin,origin_coord,distance_landbasedTransport,conversion_train,NAs){
