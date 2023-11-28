@@ -1,6 +1,6 @@
 
 #function to compute airplane emissions and potential landbased emissions 
-#conf_C_footprint compute CO2e for attendees' transport to the conference venue by air-travel (in tCO2e), the total travelled distance (km), and how much of total emission (%) can saved by switch on landbound transport
+#conf_C_footprint compute CO2e attributed to attendees' transport to a conference venue by air-travel (in tCO2e), the total travelled distance (km), and how much of total emission (%) can saved by switch on landbound transport
 
 #required packages
 

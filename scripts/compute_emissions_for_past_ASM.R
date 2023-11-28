@@ -1,5 +1,5 @@
 # emissions for all ASLO conferences since 2004
-getwd(~)
+
 ##necessary packages, functions and Data
 ###libraries
 install.packages("devtools")
@@ -19,9 +19,9 @@ library(ggplot2)
 
 ###required function
 ####read multiple sheets of attendance
-source("~/scripts/function_Multiple_sheets.R",chdir=T)
-source("./scripts/function_travel-related_emissions.R")
 
+source("./scripts/function_travel-related_emissions.R")
+source("./scripts/function_Multiple_sheets.R")
 
 ###Data
 #### import all sheets from the ASLO meeting data
@@ -54,8 +54,8 @@ data_all_ASLO_coords[[i]]<-cbind(df2,airport_code)
 
 
 
-####final data files (as the ru takes quite some time, and money for the geolocalization on Google maps)
-data_all_ASLO_coords2<-load("./RData/data_all_ASLO_coords2.RData")
+####final data files (as the run takes quite some time, and money for the geolocalization on Google maps)
+data_all_ASLO_coords2<-load("./RData/data_all_ASLO_coords2.rdata")
 
 
 ###Compute airplane emissions, and potential land-bound report

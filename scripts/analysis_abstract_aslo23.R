@@ -34,6 +34,6 @@ Abs_results2$climate_change_related_topics<-ifelse(rowSums(Abs_results2[,1:17])>
 summary_abst<-colSums(Abs_results2)[18:21]/nrow(Abs_results2)
 mypalette<-brewer.pal(10,"Paired")
 
-par(mar=c(6,6,1,1))
+
 barplot(summary_abst,names.arg=c("Climate warming", "GHG","Mitigation,\n Adaptation", "All climate \nchange related"),col=mypalette[5:8],xlab="Topics",ylab="Proportion of Abstracts\n of ASM 2023",font.lab=2,cex.lab=1.2,cex.axis=1.2)
-dev.off()
+
