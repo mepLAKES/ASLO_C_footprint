@@ -5,19 +5,12 @@
 
 
 #packages
-library(tidygeocoder)
-library("airportr")
-library("footprint")
 library("carbonr")
-library(readxl)
-library(dplyr, warn.conflicts = FALSE)
-library(ggmap)
 library(geosphere)
-library(ggplot2)
 library(rlist)
 
 #datasets
-list_all<-list.load(file="RData/data_all_ASLO_emissions_continent.rdata")
+list_all<-list.load(file="RData/data_all_ASLO_emissions.rdata")
 DF<-list_all[[18]]
 
 

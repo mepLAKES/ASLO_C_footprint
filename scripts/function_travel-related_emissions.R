@@ -4,65 +4,57 @@
 
 #required packages
 
-library(tidygeocoder)
-library("airportr")
-library("footprint")
-library("carbonr")
-library(readxl)
-library(dplyr, warn.conflicts = FALSE)
-library(ggmap)
-library(geosphere)
-library(ggplot2)
 
-install.packages("devtools")
-devtools::install_github("IDEMSInternational/carbonr")
+library("carbonr")
+library(geosphere)
 
 #function parameters
+
 #conf_loc_iata: IATA code for the closest airport of the conference location 
 #conf_loc_coord (lon, lat) : coordinates for the conference location
 #origin_iata: IATA code for the closest airport to the attendees' city of origin (vector)
-#n_per_origin : number of attendees coming from this location (vector)
-#origin_coord (lon, lat): coordinates for the attendee's origin (data.frame with lon and lat as column names)
-#distance_landbasedTransport : max distance at which landbound transport can substitute air-travel (by default 1000 km)_single number
-#conversion_train : conversion factor for landbound transport (herein 30g co2e/km)_ single number
-#NAs=number of nas
+#origin_coord (lon, lat): coordinates for the attendee's origin (data.frame with lon in the first column and lat as the 2nd column)
+#distance_landbasedTransport : max distance at which landbound transport can substitute air-travel in km _single number
+#conversion_train : conversion factor for landbound transport ( in gCo2e/km)_ single number
 
 #requires geosphere,airportr,footprint,carbonr
 
-conf_C_footprint <- function(conf_loc_iata,conf_loc_coord,origin_iata,n_per_origin,origin_coord,distance_landbasedTransport,conversion_train,NAs){
-  t<-length(origin_iata)
-  for (i in 1:t) {
-    to<-origin_iata[i]
-    emissions_1[i]<-airplane_emissions(from=conf_loc_iata,to=to,
-                                       num_people = n_per_origin[i],
-                                       radiative_force = TRUE,
-                                       include_WTT = TRUE,
-                                       round_trip = TRUE,
-                                       class = c("Economy class")
-    )
-  }
-  
-  
-  for (i in 1:t) {
-    p1<-c(origin_coord$lon[i],origin_coord$lat[i])
-    travelled_distance[i]<-distHaversine(p1,conf_loc_coord)/1000
-  }
-  
-  
-  Total_emissions<-sum(emissions_1)+NAs*mean(emissions_1,na.rm=TRUE)
-  Total_kmtravelled<-2*(sum(travelled_distance*n_per_origin)+NAs*2*mean(travelled_distance,na.rm=TRUE))
-  
-  
-  N<-which(travelled_distance<=distance_landbasedTransport)
-  
-  emissions_2<-emissions_1
-  emissions_2[N]<-(1.2*travelled_distance[N]*2*conversion_train/1000*n_per_origin[N])/1000
-  landbound<-sum(emissions_2)
-  all_flying<-sum(emissions_2)
-  percent_saved_by_landbound_transport<-((all_flying-landbound)/all_flying)*100
-  results_df<-data.frame(origin_iata,n_per_origin,origin_coord,travelled_distance,emissions_1,emissions_2)
-  
-  print(paste("Total emissions without landbound transport=", round(Total_emissions,digits=0), "tCO2_eq"))
-  print(paste("Total travelled distance=", round(Total_kmtravelled,digits=0), "km"))
-  print(paste("percent that can be saved by landbound transport=", round(percent_saved_by_landbound_transport,digits=2), "%"))
+conf_C_footprint <- function(conf_loc_iata,conf_loc_coord,origin_iata,origin_coord,distance_landbasedTransport,conversion_train){
+t<-length(origin_iata)
+emissions_1<-c()
+for (i in 1:t) {
+to<-origin_iata[i]
+emissions_1[i]<-ifelse(is.na(to),NA,airplane_emissions(from=conf_loc_iata,to=to,
+num_people = 1,
+radiative_force = TRUE,
+include_WTT = TRUE,
+round_trip = TRUE,
+class = c("Economy class"))
+)
 }
+emissions_1<<-emissions_1
+travelled_distance<-c()
+for (i in 1:t) {
+p1<-c(origin_coord[i,1],origin_coord[i,2])
+travelled_distance[i]<-distHaversine(p1,conf_loc_coord)/1000
+}
+travelled_distance<<-travelled_distance
+NAs<-length(which(is.na(to)))
+Total_emissions<-sum(emissions_1,na.rm=TRUE)+NAs*mean(emissions_1,na.rm=TRUE)
+Total_kmtravelled<-2*(sum(travelled_distance)+NAs*2*mean(travelled_distance,na.rm=TRUE))
+N<-which(travelled_distance<=distance_landbasedTransport)
+emissions_2<-emissions_1
+emissions_2[N]<-(1.2*travelled_distance[N]*2*conversion_train/1000)/1000
+landbound<-sum(emissions_2,na.rm=TRUE)
+all_flying<-sum(emissions_1,na.rm=TRUE)
+percent_saved_by_landbound_transport<-((all_flying-landbound)/all_flying)*100
+return(list(Ind_emissions_all_flying=emissions_1,Ind_travelled_distance=travelled_distance,Total_emissions_all_flying=Total_emissions,Total_kmtravelled=Total_kmtravelled,percent_saved_by_landbound_transport=percent_saved_by_landbound_transport))
+}
+
+#returns a list with
+#Ind_emissions_all_flying: individual CO2e emissions in tCO2e for flying back and forth, direct flight, economy class
+#Ind_travelled_distance: individual travelled distance in km
+#Total_emissions_all_flying: total CO2e emissions for all attendees, if they were all flying (tCO2e)
+#Total_kmtravelled: total travelled distance in km
+#percent_saved_by_landbound_transport: percent of total emissions that can be saved by report on landbound transport, in %
+
