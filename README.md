@@ -34,10 +34,10 @@ Computation of the carbon footprint of ASM (ASLO) and tests of alternative optio
 
 Department for Energy Security and Net Zero and Department for Business, E. I. S. 2022. Greenhouse gas reporting: conversion factors 2022, p. These emission conversion factors are for use by UK and international organisations to report on 2022 greenhouse gas emissions. *In* E. I. S. Department for Energy Security and Net Zero and Department for Business [ed.]. GOV.UK.
 
-**How to run the code xxx**
-quels packages à télécharger
-pour mac, windows, linux
-fichier de configuration
+**How to run the code**
+requires packages "devtools","IDEMSInternational/carbonr",tidygeocoder,airportr,footprint,carbonr,readxl,dplyr,ggmap,geosphere,ggplot2
+and an API key to extract coordinates on ggoglemaps.
+The code is written for mac, in R.
 
 **Credits Marie-Elodie Perga** [marie-elodie.perga\@unil.ch](mailto:marie-elodie.perga@unil.ch){.email} 
 Perga, M. E., T. Dittmar, D. Bouffard, and E. Kritzberg. submitted. The elephant in the conference room:
