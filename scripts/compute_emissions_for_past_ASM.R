@@ -14,24 +14,24 @@ library(dplyr, warn.conflicts = FALSE)
 library(ggmap)
 library(geosphere)
 library(ggplot2)
-
+library(rlist)
 
 
 ###required function
 ####read multiple sheets of attendance
 
-source("/Users/mperga/Documents/GitHub/ASLO_C_footprint/scripts/function_travel-related_emissions.R")
-source("/Users/mperga/Documents/GitHub/ASLO_C_footprint/scripts/function_Multiple_sheets.R")
+source("../scripts/function_travel-related_emissions.R")
+source("../scripts/function_Multiple_sheets.R")
 
 ###Data
 #### import all sheets from the ASLO meeting data
-path <- "./Data/ASLO Carbon Footprint Meeting Data.xlsx"
+path <- "../Data/ASLO Carbon Footprint Meeting Data.xlsx"
 data_all_ASLO<-multiplesheets(path)
 str(data_all_ASLO)
 
 
 #### data for conference location, from 2004 to 2023
-load("./Rdata/df_loc.RData")
+load("../Rdata/df_loc.RData")
 
 
 ##Data analysis
@@ -55,7 +55,7 @@ data_all_ASLO_coords[[i]]<-cbind(df2,airport_code)
 
 
 ####final data files (as the run takes quite some time, and money for the geolocalization on Google maps)
-data_all_ASLO_coords2<-load("./RData/data_all_ASLO_coords2.rdata")
+data_all_ASLO_coords2<-list.load("../RData/data_all_ASLO_coords2.rdata")
 
 
 ###Compute airplane emissions, and potential land-bound report
@@ -73,4 +73,4 @@ for (i in 1:n) {
   data_all_ASLO_emissions[[i]]<-df
 }
 
-save(data_all_ASLO_emissions,file="RData/data_all_ASLO_emissions.rdata")
+#save(data_all_ASLO_emissions,file="RData/data_all_ASLO_emissions.rdata")

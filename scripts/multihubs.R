@@ -10,7 +10,7 @@ library(geosphere)
 library(rlist)
 
 #datasets
-list_all<-list.load(file="RData/data_all_ASLO_emissions.rdata")
+list_all<-list.load(file="../Rdata/data_all_ASLO_emissions_continent.rdata")
 DF<-list_all[[18]]
 
 
