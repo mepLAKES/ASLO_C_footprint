@@ -39,7 +39,7 @@ p1<-c(origin_coord[i,1],origin_coord[i,2])
 travelled_distance[i]<-distHaversine(p1,conf_loc_coord)/1000
 }
 travelled_distance<<-travelled_distance
-NAs<-length(which(is.na(to)))
+NAs<-length(which(is.na(origin_iata)))
 Total_emissions<-sum(emissions_1,na.rm=TRUE)+NAs*mean(emissions_1,na.rm=TRUE)
 Total_kmtravelled<-2*(sum(travelled_distance)+NAs*2*mean(travelled_distance,na.rm=TRUE))
 N<-which(travelled_distance<=distance_landbasedTransport)
