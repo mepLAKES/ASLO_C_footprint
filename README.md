@@ -36,10 +36,18 @@ Department for Energy Security and Net Zero and Department for Business, E. I. S
 
 **How to run the code**
 
-requires packages "devtools","IDEMSInternational/carbonr",tidygeocoder,airportr,footprint,carbonr,readxl,dplyr,ggmap,geosphere,ggplot2
-and an API key to extract coordinates on ggoglemaps.
-The code is written for mac, in R.
-Download the folder, and run from the associated R project.
+This R code is available for Mac, Windows and Linux OS.
+To run the code, first clone this repository:
+``` git clone https://github.com/mepLAKES/ASLO_C_footprint ```
+
+Install the required packages:
+```
+install.packages("devtools")
+devtools::install_github("IDEMSInternational/carbonr")
+install.packages(c("tidygeocoder","airportr","footprint","carbonr","readxl","dplyr","ggmap","geosphere","ggplot2","rlist","config"))
+```
+
+You will need an API key to extract coordinates on googlemaps
 
 **Credits Marie-Elodie Perga**
 
